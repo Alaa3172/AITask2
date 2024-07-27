@@ -37,7 +37,7 @@ cd ~/catkin_ws/src
 
 2. Clone the package repository using __'git clone'__:
 ```
-git clone <repository_url>
+git clone <https://github.com/smart-methods/arduino_robot_arm.git>
 ```
 
 3. Build the workspace and source the setup file:
@@ -145,3 +145,69 @@ rostopic echo /chatter
 This is the string defined in our Arduino code.
 
 ![Screenshot from 2024-07-17 07-40-43](https://github.com/user-attachments/assets/f5e7474a-08a8-4338-8c4d-29e403e593d5)
+
+## Control Robot Arm with 'joint_state_publisher'
+1. Open a terminal and run roscore:
+```
+roscore
+```
+
+![Screenshot from 2024-07-17 07-40-53 (1)](https://github.com/user-attachments/assets/e4cf4f6a-323f-40d0-a05d-130fd27f59ef)
+
+2. Source your catkin workspace and check your motors:
+```
+source ~/catkin_ws/devel/setup.bash
+roslaunch robot_arm_pkg check_motors.launch
+```
+
+![Screenshot from 2024-07-23 21-39-57](https://github.com/user-attachments/assets/ce461c9a-4c00-4d60-a663-2fec0335148c)
+
+3. Launch Gazebo simulation:
+```
+roslaunch robot_arm_pkg check_motors_gazebo.launch
+```
+
+![Screenshot from 2024-07-23 21-41-10](https://github.com/user-attachments/assets/68cd29c5-3e00-4dd3-bbe8-60ad45ade6b7)
+
+4. Run joint states script to bridge between joint states and Gazebo:
+```
+sudo chmod +x ~/catkin_ws/src/arduino_robot_arm/robot_arm_pkg/scripts/joint_states_to_gazebo.py
+```
+
+![Screenshot from 2024-07-23 21-42-22](https://github.com/user-attachments/assets/1303ffdc-da48-4163-8d23-b7db8d87afcf)
+
+5. Make the robot arm move:
+
+To make the robot arm move, use the GUI sliders in the joint_state_publisher window to adjust the positions of the arm's joints.
+
+![Screenshot from 2024-07-23 21-40-12](https://github.com/user-attachments/assets/9cb11909-4b00-426d-bdb8-c1feb09e935d)
+
+![Screenshot from 2024-07-23 21-41-18](https://github.com/user-attachments/assets/f59d22bb-805d-4a50-bf0e-d7ccc8e80751)
+
+## Control Robot Arm using MoveIt and Kinematics
+1. Open a terminal and run roscore:
+```
+roscore
+```
+
+![Screenshot from 2024-07-17 07-40-53 (1)](https://github.com/user-attachments/assets/e4cf4f6a-323f-40d0-a05d-130fd27f59ef)
+
+2. Source your catkin workspace:
+```
+source ~/catkin_ws/devel/setup.bash
+```
+
+3. Launch MoveIt! and Gazebo simulation:
+```
+roslaunch moveit_pkg demo_gazebo.launch
+```
+
+![Screenshot from 2024-07-23 23-01-28](https://github.com/user-attachments/assets/3ffc0b91-f7e4-497a-8f2f-9daa81fc5219)
+
+4. Move the robot arm using MoveIt:
+
+To move the robot arm using MoveIt!, use the interactive markers to plan and execute movements by dragging the end-effector to the desired positions.
+
+![Screenshot from 2024-07-23 21-59-43](https://github.com/user-attachments/assets/bb6bdd5c-3fdf-40e8-a6e1-f587930a57ee)
+
+Please find videos on how to move the robot arm using the above techniques in the __Video__ folder.
